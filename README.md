@@ -12,3 +12,9 @@
 e:string twitter:string`  to create a new scaffold for the friends model
 
 - `rails db:migrate` to migrate the database
+
+
+# Used stuff 
+
+- devise 
+- associations -> change the belongs_to to has_many in the models/friends.rb
