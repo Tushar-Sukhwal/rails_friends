@@ -2,7 +2,7 @@
   <% if friend.errors.any? %>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
       <h5 class="alert-heading">
-        <%= pluralize(friend.errors.count, "error") %> prohibited this friend from being saved:
+        <strong>⚠️ <%= pluralize(friend.errors.count, "error") %> prohibited this friend from being saved:</strong>
       </h5>
       <ul class="mb-0">
         <% friend.errors.each do |error| %>
@@ -18,47 +18,104 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <%= form.label :first_name, "First Name", class: "font-weight-bold" %>
-      <%= form.text_field :first_name, class: "form-control", placeholder: "Enter first name" %>
+      <span class="text-danger">*</span>
+      <%= form.text_field :first_name, 
+          class: "form-control #{friend.errors[:first_name].any? ? 'is-invalid' : ''}", 
+          placeholder: "Enter first name",
+          required: true,
+          minlength: 2,
+          maxlength: 50 %>
+      <% if friend.errors[:first_name].any? %>
+        <div class="invalid-feedback d-block">
+          <%= friend.errors[:first_name].join(', ') %>
+        </div>
+      <% end %>
     </div>
 
     <div class="form-group col-md-6">
       <%= form.label :last_name, "Last Name", class: "font-weight-bold" %>
-      <%= form.text_field :last_name, class: "form-control", placeholder: "Enter last name" %>
+      <span class="text-danger">*</span>
+      <%= form.text_field :last_name, 
+          class: "form-control #{friend.errors[:last_name].any? ? 'is-invalid' : ''}", 
+          placeholder: "Enter last name",
+          required: true,
+          minlength: 2,
+          maxlength: 50 %>
+      <% if friend.errors[:last_name].any? %>
+        <div class="invalid-feedback d-block">
+          <%= friend.errors[:last_name].join(', ') %>
+        </div>
+      <% end %>
     </div>
   </div>
 
   <div class="form-group">
     <%= form.label :email, "Email Address", class: "font-weight-bold" %>
+    <span class="text-danger">*</span>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">📧</span>
       </div>
-      <%= form.email_field :email, class: "form-control", placeholder: "friend@example.com" %>
+      <%= form.email_field :email, 
+          class: "form-control #{friend.errors[:email].any? ? 'is-invalid' : ''}", 
+          placeholder: "friend@example.com",
+          required: true %>
     </div>
+    <% if friend.errors[:email].any? %>
+      <div class="invalid-feedback d-block">
+        <%= friend.errors[:email].join(', ') %>
+      </div>
+    <% else %>
+      <small class="form-text text-muted">We'll never share your friend's email with anyone else.</small>
+    <% end %>
   </div>
 
   <div class="form-group">
     <%= form.label :phone, "Phone Number", class: "font-weight-bold" %>
+    <span class="text-muted">(Optional)</span>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">📱</span>
       </div>
-      <%= form.telephone_field :phone, class: "form-control", placeholder: "(123) 456-7890" %>
+      <%= form.telephone_field :phone, 
+          class: "form-control #{friend.errors[:phone].any? ? 'is-invalid' : ''}", 
+          placeholder: "(123) 456-7890",
+          pattern: "[\\d\\s\\-\\+\\(\\)\\.]+",
+          minlength: 10,
+          maxlength: 20 %>
     </div>
+    <% if friend.errors[:phone].any? %>
+      <div class="invalid-feedback d-block">
+        <%= friend.errors[:phone].join(', ') %>
+      </div>
+    <% else %>
+      <small class="form-text text-muted">Format: (123) 456-7890 or 123-456-7890</small>
+    <% end %>
   </div>
 
   <div class="form-group">
     <%= form.label :twitter, "Twitter Handle", class: "font-weight-bold" %>
+    <span class="text-muted">(Optional)</span>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">@</span>
       </div>
-      <%= form.text_field :twitter, class: "form-control", placeholder: "username" %>
+      <%= form.text_field :twitter, 
+          class: "form-control #{friend.errors[:twitter].any? ? 'is-invalid' : ''}", 
+          placeholder: "username",
+          pattern: "[a-zA-Z0-9_]+",
+          maxlength: 15 %>
     </div>
-    <small class="form-text text-muted">Enter without the @ symbol</small>
+    <% if friend.errors[:twitter].any? %>
+      <div class="invalid-feedback d-block">
+        <%= friend.errors[:twitter].join(', ') %>
+      </div>
+    <% else %>
+      <small class="form-text text-muted">Enter without the @ symbol (letters, numbers, and underscores only)</small>
+    <% end %>
   </div>
 
   <div class="form-group">
-    <%= form.submit class: "btn btn-primary btn-lg btn-block" %>
+    <%= form.submit "Save Friend", class: "btn btn-primary btn-lg btn-block" %>
   </div>
 <% end %>

@@ -4,8 +4,13 @@
     <p class="lead">Manage your friends and stay connected with ease!</p>
     <hr class="my-4">
     <p>Keep track of your friends' contact information, emails, phone numbers, and social media handles all in one place.</p>
-    <%= link_to "View All Friends", friends_path, class: "btn btn-primary btn-lg" %>
-    <%= link_to "Add New Friend", new_friend_path, class: "btn btn-success btn-lg" %>
+    <% if user_signed_in? %>
+      <%= link_to "View All Friends", friends_path, class: "btn btn-primary btn-lg" %>
+      <%= link_to "Add New Friend", new_friend_path, class: "btn btn-success btn-lg" %>
+    <% else %>
+      <%= link_to "Sign Up to Get Started", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+      <%= link_to "Sign In", new_user_session_path, class: "btn btn-success btn-lg" %>
+    <% end %>
   </div>
 </div>
 
