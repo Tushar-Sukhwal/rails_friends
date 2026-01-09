@@ -1,0 +1,35 @@
+<div id="<%= dom_id friend %>" class="card shadow-sm mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= friend.first_name %> <%= friend.last_name %></h5>
+    <div class="row">
+      <div class="col-md-6">
+        <p class="card-text mb-2">
+          <strong>Email:</strong> 
+          <% if friend.email.present? %>
+            <%= mail_to friend.email, friend.email, class: "text-primary" %>
+          <% else %>
+            <span class="text-muted">Not provided</span>
+          <% end %>
+        </p>
+        <p class="card-text mb-2">
+          <strong>Phone:</strong> 
+          <% if friend.phone.present? %>
+            <%= link_to friend.phone, "tel:#{friend.phone}", class: "text-primary" %>
+          <% else %>
+            <span class="text-muted">Not provided</span>
+          <% end %>
+        </p>
+      </div>
+      <div class="col-md-6">
+        <p class="card-text mb-2">
+          <strong>Twitter:</strong> 
+          <% if friend.twitter.present? %>
+            <%= link_to "@#{friend.twitter}", "https://twitter.com/#{friend.twitter}", target: "_blank", class: "text-info" %>
+          <% else %>
+            <span class="text-muted">Not provided</span>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

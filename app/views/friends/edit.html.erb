@@ -1,0 +1,18 @@
+<% content_for :title, "Editing friend" %>
+
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <div class="card shadow">
+      <div class="card-header bg-warning text-dark">
+        <h3 class="mb-0">Edit Friend</h3>
+      </div>
+      <div class="card-body">
+        <%= render "form", friend: @friend %>
+      </div>
+      <div class="card-footer">
+        <%= link_to "View Friend", @friend, class: "btn btn-info" %>
+        <%= link_to "← Back to Friends", friends_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<% content_for :title, "Friends" %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h2">My Friends</h1>
+  <%= link_to new_friend_path, class: "btn btn-primary" do %>
+    <i class="bi bi-plus-circle"></i> Add New Friend
+  <% end %>
+</div>
+
+<% if @friends.any? %>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Twitter</th>
+          <th class="text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @friends.each do |friend| %>
+          <tr>
+            <td>
+              <strong><%= link_to "#{friend.first_name} #{friend.last_name}", friend, class: "text-dark" %></strong>
+            </td>
+            <td><%= friend.email %></td>
+            <td><%= friend.phone %></td>
+            <td>
+              <% if friend.twitter.present? %>
+                <%= link_to "@#{friend.twitter}", "https://twitter.com/#{friend.twitter}", target: "_blank", class: "text-info" %>
+              <% end %>
+            </td>
+            <td class="text-right">
+              <%= link_to "View", friend, class: "btn btn-sm btn-info" %>
+              <%= link_to "Edit", edit_friend_path(friend), class: "btn btn-sm btn-warning" %>
+              <%= button_to "Delete", friend, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class="alert alert-info text-center" role="alert">
+    <h4 class="alert-heading">No friends yet!</h4>
+    <p>Start building your friend list by adding your first friend.</p>
+    <hr>
+    <%= link_to "Add Your First Friend", new_friend_path, class: "btn btn-primary" %>
+  </div>
+<% end %>

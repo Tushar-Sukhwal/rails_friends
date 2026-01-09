@@ -1,0 +1,40 @@
+<div class="jumbotron">
+  <h1 class="display-4">About Us</h1>
+  <p class="lead">Learn more about the Friend List App</p>
+  <hr class="my-4">
+  
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <p class="lead">
+        <%= @about_me if @about_me %>
+      </p>
+      
+      <% if @answer %>
+        <div class="alert alert-info">
+          <strong>Fun Fact:</strong> 2 + 2 = <%= @answer %>
+        </div>
+      <% end %>
+      
+      <h3 class="mt-4">What is Friend List App?</h3>
+      <p>
+        Friend List App is a simple, elegant solution for managing your friends and their contact information. 
+        Built with Ruby on Rails and styled with Bootstrap, it provides a clean and intuitive interface 
+        for keeping track of the people who matter most to you.
+      </p>
+      
+      <h3 class="mt-4">Features</h3>
+      <ul class="list-group list-group-flush mb-4">
+        <li class="list-group-item">📝 Add and manage friend information</li>
+        <li class="list-group-item">📧 Store email addresses and phone numbers</li>
+        <li class="list-group-item">🐦 Track social media handles</li>
+        <li class="list-group-item">🔍 Quick search and easy navigation</li>
+        <li class="list-group-item">📱 Responsive design works on any device</li>
+      </ul>
+      
+      <div class="text-center mt-4">
+        <%= link_to "View Your Friends", friends_path, class: "btn btn-primary btn-lg" %>
+        <%= link_to "Back to Home", root_path, class: "btn btn-secondary btn-lg" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<%= form_with(model: friend, local: true) do |form| %>
+  <% if friend.errors.any? %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <h5 class="alert-heading">
+        <%= pluralize(friend.errors.count, "error") %> prohibited this friend from being saved:
+      </h5>
+      <ul class="mb-0">
+        <% friend.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= form.label :first_name, "First Name", class: "font-weight-bold" %>
+      <%= form.text_field :first_name, class: "form-control", placeholder: "Enter first name" %>
+    </div>
+
+    <div class="form-group col-md-6">
+      <%= form.label :last_name, "Last Name", class: "font-weight-bold" %>
+      <%= form.text_field :last_name, class: "form-control", placeholder: "Enter last name" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :email, "Email Address", class: "font-weight-bold" %>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">📧</span>
+      </div>
+      <%= form.email_field :email, class: "form-control", placeholder: "friend@example.com" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :phone, "Phone Number", class: "font-weight-bold" %>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">📱</span>
+      </div>
+      <%= form.telephone_field :phone, class: "form-control", placeholder: "(123) 456-7890" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :twitter, "Twitter Handle", class: "font-weight-bold" %>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">@</span>
+      </div>
+      <%= form.text_field :twitter, class: "form-control", placeholder: "username" %>
+    </div>
+    <small class="form-text text-muted">Enter without the @ symbol</small>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit class: "btn btn-primary btn-lg btn-block" %>
+  </div>
+<% end %>
